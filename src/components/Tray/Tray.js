@@ -38,8 +38,12 @@ function getStreamStates(callObject) {
  * - disabled: boolean
  */
 export default function Tray(props) {
+  var today = new Date();
+var time = today.getMinutes();
   const callObject = useContext(CallObjectContext);
   const [isCameraMuted, setCameraMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(time);
+  const [userTimeCoin, setUserTimeCoin] = useState(1);
   const [isMicMuted, setMicMuted] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
 
@@ -66,6 +70,15 @@ export default function Tray(props) {
    * This event will capture any changes to your audio/video mute state.
    */
   useEffect(() => {
+    const interval = setInterval(() => {
+      var today = new Date();
+      var time = today.getMinutes();
+      var totalTime = userTimeCoin +currentTime
+      if(time>=totalTime){
+        console.log('jai ram ji ki',totalTime);
+        props.onClickLeaveCall && props.onClickLeaveCall();
+      }
+    }, 3600);
     if (!callObject) return;
 
     function handleNewParticipantsState(event) {
