@@ -78,7 +78,7 @@ var time = today.getMinutes();
         console.log('jai ram ji ki',totalTime);
         props.onClickLeaveCall && props.onClickLeaveCall();
       }
-    }, 3600);
+    }, 60000);
     if (!callObject) return;
 
     function handleNewParticipantsState(event) {
